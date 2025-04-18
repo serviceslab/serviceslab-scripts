@@ -1,10 +1,10 @@
 #create_vm.ps1
 #Install-Module -Name vmware.powercli -Force
-#Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -DefaultVIServerMode Single -Confirm:$false -DisplayDeprecationWarnings:$false
+#Set-PowerCLIConfiguration -Scope User -ParticipateInCEIP $false -Confirm:$false
+Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false
 Connect-VIServer -Server $hypervisor_host -User $hypervisor_user -Password $hypervisor_password
 $vm_location=Get-Folder $vm_folder -ErrorAction SilentlyContinue -ErrorVariable NoFolder | Where-Object {$_.Parent.Name -eq $vm_parent_folder}
 $vm_template_obj=Get-Template $vm_template
-#Set hostname
 $vm_hostname="$hostname_prefix.$app.$domain"
 Write-Host "$vm_hostname"
 Write-Host "Launching VM..."
