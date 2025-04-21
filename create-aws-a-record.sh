@@ -2,7 +2,7 @@
 yum install -y jq
 cat << EEOF >> /etc/rc.local
 #get zone id from hostname
-aws route53 list-hosted-zones | jq -r '.HostedZones[]|select(.Name=="$domain.") | .Id' | cut -d/ -f3 > /.hostedzone
+/usr/local/bin/aws route53 list-hosted-zones | jq -r '.HostedZones[]|select(.Name=="$domain.") | .Id' | cut -d/ -f3 > /.hostedzone
 #create batch file
 cat << EOF > /.create_a_record.json
 {
@@ -17,6 +17,6 @@ cat << EOF > /.create_a_record.json
 }
 EOF
 #create a record
-aws route53 change-resource-record-sets --hosted-zone-id \$(cat /.hostedzone) --change-batch file:///.create_a_record.json
+/usr/local/bin/aws route53 change-resource-record-sets --hosted-zone-id \$(cat /.hostedzone) --change-batch file:///.create_a_record.json
 EEOF
 chmod +x /etc/rc.local

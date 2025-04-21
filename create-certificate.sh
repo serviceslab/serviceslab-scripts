@@ -14,7 +14,7 @@ cat << EOF > /.create_txt_record.json
 }
 EOF
 sleep 3
-aws route53 change-resource-record-sets --hosted-zone-id \$(cat /.hostedzone) --change-batch file:///.create_txt_record.json
+/usr/local/bin/aws route53 change-resource-record-sets --hosted-zone-id \$(cat /.hostedzone) --change-batch file:///.create_txt_record.json
 sleep 20
 EOFa
 chmod +x /.certbot_authenticator.sh
@@ -33,7 +33,7 @@ cat << EOF > /.delete_txt_record.json
 }
 EOF
 sleep 3
-aws route53 change-resource-record-sets --hosted-zone-id \$(cat /.hostedzone) --change-batch file:///.delete_txt_record.json
+/usr/local/bin/aws route53 change-resource-record-sets --hosted-zone-id \$(cat /.hostedzone) --change-batch file:///.delete_txt_record.json
 EOFb
 chmod +x /.certbot_cleanup.sh
 #install certbot
@@ -45,7 +45,7 @@ cat << EOF >> /etc/rc.local
 sleep 10
 #create certificate
 #if dev, sign with test CAs
-if [[ \$(hostname) != *"dev"* ]]; then
+if [[ \$(hostname) != *".dev."* ]]; then
     certbot certonly --domain \$(hostname) --manual --preferred-challenges dns --manual-auth-hook /.certbot_authenticator.sh --manual-cleanup-hook /.certbot_cleanup.sh --agree-tos --register-unsafely-without-email --keep-until-expiring --key-type rsa
 else
     certbot certonly --domain \$(hostname) --manual --preferred-challenges dns --manual-auth-hook /.certbot_authenticator.sh --manual-cleanup-hook /.certbot_cleanup.sh --agree-tos --register-unsafely-without-email --keep-until-expiring --key-type rsa --test-cert
