@@ -1,6 +1,8 @@
 #create_vm.ps1
 #Install-Module -Name vmware.powercli -Force
 #Set-PowerCLIConfiguration -Scope User -ParticipateInCEIP $false -Confirm:$false
+#increase timeout
+Set-PowerCLIConfiguration -WebOperationTimeoutSeconds 1800 -Scope Session -Confirm:$false
 Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false
 Connect-VIServer -Server $hypervisor_host -User $hypervisor_user -Password $hypervisor_password
 $vm_location=Get-Folder $vm_folder -ErrorAction SilentlyContinue -ErrorVariable NoFolder | Where-Object {$_.Parent.Name -eq $vm_parent_folder}
