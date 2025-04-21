@@ -5,6 +5,8 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
 unzip -uq awscliv2.zip
 ./aws/install --update
 export PATH=/usr/local/bin/:$PATH
+echo "export PATH=/usr/local/bin/:$PATH" >> .bashrc
+source .bashrc
 mkdir .aws >/dev/null 2>&1 || true
 cat << EOF > .aws/config
 [default]
