@@ -26,7 +26,7 @@ sudo -u ilo-pce /opt/illumio-pce/illumio-pce-ctl status -w
 sleep 10
 sudo -u ilo-pce /opt/illumio-pce/illumio-pce-ctl status -w
 #create domain
-sudo --preserve-env -u ilo-pce ILO_PASSWORD=$pce_admin_password /opt/illumio-pce/illumio-pce-db-management create-domain --user-name $pce_admin_username_email_address --full-name admin --org-name $(hostname)
+sudo --preserve-env -u ilo-pce ILO_PASSWORD="$pce_admin_password" /opt/illumio-pce/illumio-pce-db-management create-domain --user-name $pce_admin_username_email_address --full-name admin --org-name $(hostname)
 #get latest ven bundle
 latest_illumio_ven_bundle=$(ls /illumio-ven-bundle-*|tail -n 1)
 #install ven bundle
