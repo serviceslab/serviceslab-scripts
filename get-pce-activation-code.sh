@@ -8,4 +8,4 @@ auth_username=$(echo $login_response | jq -r '.auth_username')
 session_token=$(echo $login_response | jq -r '.session_token')
 #get activation code
 activation_code=$(curl -u $auth_username:$session_token https://$(hostname):$port/api/v2/orgs/1/pairing_profiles/1/pairing_key -X POST -H 'content-type: application/json' --data-raw '{}' | jq -r .activation_code)
-echo $activation_code > /root/.activation_code
+echo $activation_code > .activation_code
