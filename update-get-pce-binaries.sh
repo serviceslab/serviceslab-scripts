@@ -4,7 +4,9 @@
 # the latest Illumio PCE, UI, compatibility, and VEN packages based on available versions.
 
 # Create or overwrite the target script with a shebang and initial setup
-cat <<EOF > "$target_script"
+# Write to tmp script
+temp_target_script=${target_script/.sh/.tmp}
+cat <<EOF > "$temp_target_script"
 #!/bin/bash
 # get-pce-binaries.sh
 cd /
@@ -92,30 +94,31 @@ for major_minor_version in $major_minor_list; do
 
         # Write the conditional download block into the target script
         if $first_if_statement; then
-            echo "if [[ \$pce_version == \"$patch\" ]]; then" >> "$target_script"
+            echo "if [[ \$pce_version == \"$patch\" ]]; then" >> "$temp_target_script"
             first_if_statement=false
         else
-            echo "elif [[ \$pce_version == \"$patch\" ]]; then" >> "$target_script"
+            echo "elif [[ \$pce_version == \"$patch\" ]]; then" >> "$temp_target_script"
         fi
 
-        cat <<EOF >> "$target_script"
+        cat <<EOF >> "$temp_target_script"
   curl --remote-name https://$repo/$major_minor_version/GA%20Releases/$patch/pce/pkgs/$pce_pkg
   curl --remote-name https://$repo/$major_minor_version/GA%20Releases/$patch/pce/pkgs/UI/$ui_pkg
   curl --remote-name $compat_url
 EOF
 
         for bundle in "${ven_bundles[@]}"; do
-            echo "  curl --remote-name ${bundle}" >> "$target_script"
+            echo "  curl --remote-name ${bundle}" >> "$temp_target_script"
         done
     done
 done
 
 # Close the final if-block and return to home directory
-cat <<EOF >> "$target_script"
+cat <<EOF >> "$temp_target_script"
 fi
 cd
 EOF
 
 # Make the generated script executable
+cp "$temp_target_script" "$target_script"
 chmod +x "$target_script"
 echo "Done updating $target_script"
