@@ -101,7 +101,7 @@ for major_minor_version in $major_minor_list; do
         fi
 
         cat <<EOF >> "$temp_target_script"
-  curl --remote-name https://$repo/$major_minor_version/GA%20Releases/$patch/pce/pkgs/$pce_pkg
+  curl --remote-name https://$repo/$major_minor_version/GA%20Releases/$patch/pce/pkgs/$pce_pkg &
   curl --remote-name https://$repo/$major_minor_version/GA%20Releases/$patch/pce/pkgs/UI/$ui_pkg
   curl --remote-name $compat_url &
 EOF
