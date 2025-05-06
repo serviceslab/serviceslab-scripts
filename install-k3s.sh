@@ -10,7 +10,7 @@ service k3s restart
 #get/set version variable
 [[ "$version" ]] || version=latest
 #get illumio-values-$version.yaml
-pce=echo "$management_server" | cut -d: -f1
+pce=$(echo "$management_server" | cut -d: -f1)
 curl $pce/illumio-values-$version.yaml -o illumio-values-$version.yaml
 #append chain to ca bundle
 curl $pce/cert.pem -o /cert.crt
