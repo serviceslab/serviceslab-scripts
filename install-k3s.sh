@@ -4,6 +4,7 @@ curl -sfL https://get.k3s.io | sh -
 echo "export KUBECONFIG=/etc/rancher/k3s/k3s.yaml" >> .bash_profile
 source .bash_profile
 curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+export PATH=$PATH:/usr/local/bin/
 rm -rf /etc/machine-id; systemd-machine-id-setup;
 service k3s restart
 #get/set version variable
