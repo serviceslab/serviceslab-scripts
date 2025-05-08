@@ -101,13 +101,13 @@ for major_minor_version in $major_minor_list; do
         fi
 
         cat <<EOF >> "$temp_target_script"
-  curl --remote-name https://$repo/$major_minor_version/GA%20Releases/$patch/pce/pkgs/$pce_pkg
-  curl --remote-name https://$repo/$major_minor_version/GA%20Releases/$patch/pce/pkgs/UI/$ui_pkg
-  curl --silent --remote-name $compat_url &
+  [ -f $pce_pkg ] || curl --remote-name https://$repo/$major_minor_version/GA%20Releases/$patch/pce/pkgs/$pce_pkg
+  [ -f $ui_pkg ] || curl --remote-name https://$repo/$major_minor_version/GA%20Releases/$patch/pce/pkgs/UI/$ui_pkg
+  [ -f $compat_file ] || curl --silent --remote-name $compat_url &
 EOF
 
         for bundle in "${ven_bundles[@]}"; do
-            echo "  curl -silent --remote-name ${bundle} &" >> "$temp_target_script"
+            echo "  [ -f ${basename $bundle} ] || curl -silent --remote-name ${bundle} &" >> "$temp_target_script"
         done
     done
 done
