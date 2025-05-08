@@ -9,7 +9,7 @@ temp_target_script=${target_script/.sh/.tmp}
 cat <<EOF > "$temp_target_script"
 #!/bin/bash
 # get-pce-binaries.sh
-cd /
+cd /tmp
 EOF
 
 # Fetch the latest available compatibility matrix
