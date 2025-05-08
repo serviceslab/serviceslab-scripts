@@ -107,7 +107,7 @@ for major_minor_version in $major_minor_list; do
 EOF
 
         for bundle in "${ven_bundles[@]}"; do
-            echo "  [ -f ${basename $bundle} ] || curl -silent --remote-name ${bundle} &" >> "$temp_target_script"
+            echo "  [ -f $(basename $bundle) ] || curl -silent --remote-name ${bundle} &" >> "$temp_target_script"
         done
     done
 done
