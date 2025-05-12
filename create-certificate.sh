@@ -37,8 +37,8 @@ sleep 3
 EOFb
 chmod +x /.certbot_cleanup.sh
 #install certbot
-yum install -y epel-release
-yum install -y certbot
+dnf install -y epel-release
+dnf install -y certbot
 #append create certificate commands to /etc/rc.local
 cat << EOF >> /etc/rc.local
 #sleep for creation of dns record on name servers

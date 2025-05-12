@@ -1,5 +1,5 @@
 #create-pce-objects.sh
-yum install -y jq
+dnf install -y jq
 basic_auth_token=$(echo -n "$pce_admin_username_email_address:$pce_admin_password"|base64 --wrap=0)
 auth_token=$(curl -X POST -H "Authorization: Basic $basic_auth_token" https://$(hostname):$port/api/v2/login_users/authenticate?pce_fqdn=$(hostname) | jq -r '.auth_token')
 login_response=$(curl -H "Authorization: Token token=$auth_token" https://$(hostname):$port/api/v2/users/login)

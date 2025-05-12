@@ -1,5 +1,5 @@
 #install configure k3s
-yum install -y git &
+dnf install -y git &
 export PATH=$PATH:/usr/local/bin/
 curl -sfL https://get.k3s.io | sh -
 echo "export KUBECONFIG=/etc/rancher/k3s/k3s.yaml" >> .bash_profile

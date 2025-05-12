@@ -1,5 +1,5 @@
 #install-configure-haproxy.sh
-yum install -y haproxy
+dnf install -y haproxy
 systemctl enable haproxy
 cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.original
 cat << EOF > /etc/haproxy/haproxy.cfg

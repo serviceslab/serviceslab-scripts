@@ -1,5 +1,5 @@
 #create-aws-a-record.sh
-yum install -y jq
+dnf install -y jq
 cat << EEOF >> /etc/rc.local
 #get zone id from hostname
 /usr/local/bin/aws route53 list-hosted-zones | jq -r '.HostedZones[]|select(.Name=="$domain.") | .Id' | cut -d/ -f3 > /.hostedzone

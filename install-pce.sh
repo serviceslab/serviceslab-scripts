@@ -1,5 +1,5 @@
 #install-pce.sh
-yum install -y wget bzip2 net-tools initscripts libxcrypt-compat compat-openssl11 glibc-langpack-en
+dnf install -y wget bzip2 net-tools initscripts libxcrypt-compat compat-openssl11 glibc-langpack-en
 localectl set-locale LANG=en_US.utf8
 
 rpm -Uvh /tmp/illumio-pce-*.rpm
@@ -39,6 +39,6 @@ done
 #sleep 10 && systemctl restart sshd &
 #pkill sshd &
 #install nginx
-yum install nginx -y
+dnf install nginx -y
 systemctl enable nginx
 systemctl start nginx
