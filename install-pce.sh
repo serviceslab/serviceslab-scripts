@@ -1,5 +1,5 @@
 #install-pce.sh
-dnf install -y wget bzip2 net-tools initscripts libxcrypt-compat compat-openssl11 langpacks-en
+dnf install -y wget bzip2 net-tools initscripts libxcrypt-compat compat-openssl11 langpacks-en tar glibc-langpack-en libnsl
 
 rpm -Uvh /tmp/illumio-pce-*.rpm
 #mkdir /opt/illumio-pce/ && tar -xf illumio-pce-*.tgz -C /opt/illumio-pce/ && chown -R root:ilo-pce /opt/illumio-pce/
