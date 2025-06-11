@@ -138,5 +138,6 @@ Dl7iS2Msv4wpBii4j1Qs8gXAb7yI9ozS2weCmu5oqDN4SnYZBYoirT8seUia62aw
 XMVzkkQUsjRQz2oqQsTUZxtDuIU0VCNYPY0UgeSLjdzo+cUIbaoO6M8rAK42tq/1
 jJ+0RltUFPHxLXxi0LIAV0tFJxEJVUbpv7Nt
 -----END CERTIFICATE-----" > STAGING-False-Fennel-E6.pem
-update-ca-trust enable && update-ca-trust extract
+#update-ca-trust enable && update-ca-trust extract
+update-ca-trust extract
 cd
