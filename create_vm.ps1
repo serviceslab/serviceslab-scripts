@@ -10,7 +10,7 @@ $vm_template_obj=Get-Template $vm_template
 $vm_hostname="$hostname_prefix.$app.$domain"
 Write-Host "$vm_hostname"
 Write-Host "Launching VM..."
-$vm=New-VM -Template $vm_template_obj -Name $vm_hostname -Location (Get-Folder -Id $vm_location.Id) -VMHost (Get-VMHost -State Connected | Get-Random) -Datastore (Get-Datastore *support* | Get-Random)
+$vm=New-VM -Template $vm_template_obj -Name $vm_hostname -Location (Get-Folder -Id $vm_location.Id) -VMHost (Get-VMHost -State Connected | Get-Random) -Datastore (Get-Datastore | Where-Object { $_.Name -like "*support*" -or $_.Name -like "*ssd1*" -or $_.Name -like "*avago*" } | Get-Random)
 Write-Host "VM created."
 Start-Sleep 20
 Set-VM $vm -MemoryGB $vm_memory_gb -NumCpu $vm_cores -Confirm:$false
