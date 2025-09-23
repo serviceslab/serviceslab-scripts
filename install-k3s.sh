@@ -1,5 +1,5 @@
 #install configure k3s
-dnf install -y git &
+dnf install -y git openssl
 export PATH=$PATH:/usr/local/bin/
 curl -sfL https://get.k3s.io | sh -
 echo "export KUBECONFIG=/etc/rancher/k3s/k3s.yaml" >> .bash_profile
@@ -11,7 +11,7 @@ service k3s restart
 [[ "$version" ]] || version=latest
 #get illumio-values-$version.yaml
 pce=$(echo "$management_server" | cut -d: -f1)
-curl $pce/illumio-values-$version.yaml -o illumio-values-$version.yaml
+curl $pce/illumio-values-$version.yaml -o illumio-values.yaml
 #append chain to ca bundle
 curl $pce/cert.pem -o /cert.crt
 curl $pce/chain.pem -o /chain.crt
@@ -24,13 +24,12 @@ else
 fi
 cp /cert.crt /etc/pki/ca-trust/source/anchors/
 update-ca-trust enable && update-ca-trust extract
-#helm install
 kubectl create ns illumio-system
 kubectl --namespace illumio-system create configmap root-ca-config --from-file=/etc/pki/ca-trust/source/anchors/cert.crt
 if [[ "$version" == "latest" ]]; then
-  helm install illumio -f illumio-values-$version.yaml oci://quay.io/illumio/illumio --namespace illumio-system
+  helm install illumio -f illumio-values.yaml oci://quay.io/illumio/illumio --namespace illumio-system
 else
-  helm install illumio -f illumio-values-$version.yaml oci://quay.io/illumio/illumio --namespace illumio-system --version $version
+  helm install illumio -f illumio-values.yaml oci://quay.io/illumio/illumio --namespace illumio-system --version $version
 fi
 #create nginx deployment
 kubectl create deployment nginx-alpha --image=nginx
