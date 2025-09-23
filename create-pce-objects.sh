@@ -17,6 +17,14 @@ curl -u $auth_username:$session_token https://$(hostname):$port/api/v2/orgs/1/la
 curl -u $auth_username:$session_token https://$(hostname):$port/api/v2/orgs/1/labels -H 'Content-Type: application/json' --data-raw '{"key":"app","value":"A-SUSE"}'
 #create tomcat app label
 curl -u $auth_username:$session_token https://$(hostname):$port/api/v2/orgs/1/labels -H 'Content-Type: application/json' --data-raw '{"key":"app","value":"A-TOMCAT"}'
+#create ntp app label
+curl -u $auth_username:$session_token https://$(hostname):$port/api/v2/orgs/1/labels -H 'Content-Type: application/json' --data-raw '{"key":"app","value":"A-NTP"}'
+#create redis app label
+curl -u $auth_username:$session_token https://$(hostname):$port/api/v2/orgs/1/labels -H 'Content-Type: application/json' --data-raw '{"key":"app","value":"A-REDIS"}'
+#create mongo app label
+curl -u $auth_username:$session_token https://$(hostname):$port/api/v2/orgs/1/labels -H 'Content-Type: application/json' --data-raw '{"key":"app","value":"A-MONGODB"}'
+#create caddy app label
+curl -u $auth_username:$session_token https://$(hostname):$port/api/v2/orgs/1/labels -H 'Content-Type: application/json' --data-raw '{"key":"app","value":"A-CADDY"}'
 #create k3s app label
 curl -u $auth_username:$session_token https://$(hostname):$port/api/v2/orgs/1/labels -H 'Content-Type: application/json' --data-raw '{"key":"app","value":"A-K3S"}'
 #create container role label
