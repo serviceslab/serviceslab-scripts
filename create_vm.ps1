@@ -10,20 +10,17 @@ $vm_template_obj=Get-Template $vm_template
 $vm_hostname="$hostname_prefix.$app.$domain"
 Write-Host "$vm_hostname"
 Write-Host "Launching VM..."
-$vm_host=Get-VMHost -State Connected | Get-Random
-if($vm_host.ToString() -eq "172.22.91.13"){$vm_host="172.22.91.12"}
-if($vm_host -eq "172.22.91.12"){
-    Write-Host $vm_host
+if($vm_region -eq "EU"){
+    $vm_host=Get-VMHost -Name "172.22.91.12"
     $datastore=Get-Datastore -RelatedObject $vm_host | Where-Object{$_.Name -like "*local*"} | Get-Random
-    Write-Host $datastore
-    $vm=New-VM -Template $vm_template_obj -Name $vm_hostname -Location(Get-Folder -Id $vm_location.Id) -VMHost $vm_host -Datastore $datastore
 }
 else{
-    Write-Host $vm_host
+    $vm_host=Get-VMHost -State Connected | Get-Random
     $datastore=Get-Datastore -RelatedObject $vm_host | Where-Object{$_.Name -like "*support*"} | Get-Random
-    Write-Host $datastore
-    $vm=New-VM -Template $vm_template_obj -Name $vm_hostname -Location(Get-Folder -Id $vm_location.Id) -VMHost $vm_host -Datastore $datastore
 }
+Write-Host $vm_host
+Write-Host $datastore
+$vm=New-VM -Template $vm_template_obj -Name $vm_hostname -Location(Get-Folder -Id $vm_location.Id) -VMHost $vm_host -Datastore $datastore
 Write-Host "VM created."
 Start-Sleep 20
 Set-VM $vm -MemoryGB $vm_memory_gb -NumCpu $vm_cores -Confirm:$false
