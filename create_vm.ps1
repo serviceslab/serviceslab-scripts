@@ -12,7 +12,7 @@ Write-Host "$vm_hostname"
 Write-Host "Launching VM..."
 if($vm_region -eq "EU"){
     $vm_host=Get-VMHost -Name "172.22.91.12"
-    $datastore=Get-Datastore -RelatedObject $vm_host | Where-Object{$_.Name -like "*local*"} | Get-Random
+    $datastore=Get-Datastore -RelatedObject $vm_host | Where-Object{$_.Name -like "*LOCAL*"} | Get-Random
 }
 else{
     $vm_host=Get-VMHost -State Connected | Get-Random
