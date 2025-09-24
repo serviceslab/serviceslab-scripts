@@ -11,7 +11,7 @@ $vm_template_obj=Get-Template $vm_template
 $vm_hostname="$hostname_prefix.$app.$domain"
 Write-Host "$vm_hostname"
 Write-Host "Launching VM..."
-if($vm_region -eq "EU"){
+if($vcenter_region -eq "EU"){
     $vm_host=Get-VMHost -Name "172.22.91.12"
     $datastore=Get-Datastore -RelatedObject $vm_host | Where-Object{$_.Name -like "*LOCAL*"}
 }
