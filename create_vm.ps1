@@ -10,6 +10,19 @@ $vm_template_obj=Get-Template $vm_template
 $vm_hostname="$hostname_prefix.$app.$domain"
 Write-Host "$vm_hostname"
 Write-Host "Launching VM..."
+
+$vm_host = Get-VMHost -Name "172.22.91.12"
+Write-Host "VM Host: $vm_host"
+
+$datastore = Get-Datastore -RelatedObject $vm_host | Where-Object { $_.Name -like "*LOCAL*" }
+if ($datastore.Count -eq 0) {
+    Write-Host "No datastores found matching '*LOCAL*'."
+    exit 1  # Exit if no datastore is found
+} else {
+    $datastore = $datastore | Get-Random
+    Write-Host "Selected Datastore: $datastore"
+}
+
 if($vm_region -eq "EU"){
     $vm_host=Get-VMHost -Name "172.22.91.12"
     $datastore=Get-Datastore -RelatedObject $vm_host | Where-Object{$_.Name -like "*LOCAL*"} | Get-Random
