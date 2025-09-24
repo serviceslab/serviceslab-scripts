@@ -18,6 +18,12 @@ else{
     $vm_host=Get-VMHost -State Connected | Get-Random
     $datastore=Get-Datastore -RelatedObject $vm_host | Where-Object{$_.Name -like "*support*"} | Get-Random
 }
+if (-not $datastore) {
+    Write-Host "No datastore found matching '*LOCAL*' for VM Host: $vm_host"
+    exit 1
+} else {
+    Write-Host "Selected Datastore: $datastore"
+}
 Write-Host $vm_host
 Write-Host $datastore
 $vm=New-VM -Template $vm_template_obj -Name $vm_hostname -Location(Get-Folder -Id $vm_location.Id) -VMHost $vm_host -Datastore $datastore
