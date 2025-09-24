@@ -20,7 +20,11 @@ else{
 }
 if (-not $datastore) {
     Write-Host "No datastore found matching '*LOCAL*' for VM Host: $vm_host"
-    exit 1
+    # List all datastores for debugging
+    $allDatastores = Get-Datastore -RelatedObject $vm_host
+    Write-Host "Available datastores:"
+    $allDatastores | ForEach-Object { Write-Host $_.Name }
+    exit 1  # Exit if no datastore is found
 } else {
     Write-Host "Selected Datastore: $datastore"
 }
