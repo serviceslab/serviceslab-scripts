@@ -2,16 +2,16 @@
 #Install-Module -Name vmware.powercli -Force
 #Set-PowerCLIConfiguration -Scope User -ParticipateInCEIP $false -Confirm:$false
 #increase timeout
-Write-Host $vm_region
 Set-PowerCLIConfiguration -WebOperationTimeoutSeconds 1800 -Scope Session -Confirm:$false
 Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false
 Connect-VIServer -Server $hypervisor_host -User $hypervisor_user -Password $hypervisor_password
 $vm_location=Get-Folder $vm_folder -ErrorAction SilentlyContinue -ErrorVariable NoFolder | Where-Object{$_.Parent.Name -eq $vm_parent_folder}
 $vm_template_obj=Get-Template $vm_template
 $vm_hostname="$hostname_prefix.$app.$domain"
+Write-Host "$vcenter_region"
 Write-Host "$vm_hostname"
 Write-Host "Launching VM..."
-if($vcenter_region -eq "EU"){
+if("$vcenter_region" -eq "EU"){
     $vm_host=Get-VMHost -Name "172.22.91.12"
     $datastore=Get-Datastore -RelatedObject $vm_host | Where-Object{$_.Name -like "*LOCAL*"}
 }
