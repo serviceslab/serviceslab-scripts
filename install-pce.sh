@@ -31,11 +31,11 @@ sudo --preserve-env -u ilo-pce ILO_PASSWORD="$pce_admin_password" /opt/illumio-p
 latest_illumio_ven_bundle=$(ls /tmp/illumio-ven-bundle-*|tail -n 1)
 #install ven bundle
 sudo -u ilo-pce /opt/illumio-pce/illumio-pce-ctl ven-software-install $latest_illumio_ven_bundle --compatibility-matrix /tmp/illumio-release-compatibility-* --default --no-prompt --orgs 1
-illumio_ven_bundles=($(ls /tmp/illumio-ven-bundle-*))
-for illumio_ven_bundle in "${illumio_ven_bundles[@]}"; do
- if [[ $illumio_ven_bundle == $latest_illumio_ven_bundle ]]; then continue; fi
- sudo -u ilo-pce /opt/illumio-pce/illumio-pce-ctl ven-software-install $illumio_ven_bundle --compatibility-matrix /tmp/illumio-release-compatibility-* --no-prompt --orgs 1
-done
+#illumio_ven_bundles=($(ls /tmp/illumio-ven-bundle-*))
+#for illumio_ven_bundle in "${illumio_ven_bundles[@]}"; do
+ #if [[ $illumio_ven_bundle == $latest_illumio_ven_bundle ]]; then continue; fi
+ #sudo -u ilo-pce /opt/illumio-pce/illumio-pce-ctl ven-software-install $illumio_ven_bundle --compatibility-matrix /tmp/illumio-release-compatibility-* --no-prompt --orgs 1
+#done
 #sleep 10 && systemctl restart sshd &
 #pkill sshd &
 #install nginx
