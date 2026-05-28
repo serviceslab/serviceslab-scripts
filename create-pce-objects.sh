@@ -31,6 +31,8 @@ curl -u $auth_username:$session_token https://$(hostname):$port/api/v2/orgs/1/la
 curl -u $auth_username:$session_token https://$(hostname):$port/api/v2/orgs/1/labels -H 'Content-Type: application/json' --data-raw '{"key":"role","value":"R-CONTAINER"}'
 #create share app label
 curl -u $auth_username:$session_token https://$(hostname):$port/api/v2/orgs/1/labels -H 'Content-Type: application/json' --data-raw '{"key":"app","value":"A-SHARE"}'
+#create lwven app label
+curl -u $auth_username:$session_token https://$(hostname):$port/api/v2/orgs/1/labels -H 'Content-Type: application/json' --data-raw '{"key":"app","value":"A-LWVEN"}'
 #get service
 service_href=$(curl -u $auth_username:$session_token "https://$(hostname):$port/api/v2/orgs/1/sec_policy/active/services?name=S-NETBIOS" | jq -r .[].href)
 #create enforcement boundry
@@ -41,6 +43,10 @@ curl -u $auth_username:$session_token https://$(hostname):$port/api/v2/orgs/1/se
 #curl -u $auth_username:$session_token https://$(hostname):$port/api/v2/orgs/1/optional_features -X PUT -H 'Content-Type: application/json' --data-raw '[{"name":"ransomware_readiness_dashboard","enabled":true}]'
 #get dev label href
 dev_label_href=$(curl -u $auth_username:$session_token "https://$(hostname):$port/api/v2/orgs/1/labels?key=env&value=Development" | jq -r .[].href)
+#get lwven label href
+lwven_label_href=$(curl -u $auth_username:$session_token "https://$(hostname):$port/api/v2/orgs/1/labels?key=app&value=A-LWVEN" | jq -r .[].href)
+#create lw-ven pairing profile
+lw_ven_pairing_profiles_response=$(curl -u $auth_username:$session_token https://$(hostname):$port/api/v2/orgs/1/pairing_profiles -X POST -H 'content-type: application/json' --data-raw '{"name":"pp-lwven","description":"","labels":[{"href":"'$lwven_label_href'"},{"href":"'$dev_label_href'"}],"enforcement_mode":"idle","visibility_level":"flow_summary","allowed_uses_per_key":"unlimited","agent_software_release":null,"key_lifespan":"unlimited","app_label_lock":true,"env_label_lock":true,"loc_label_lock":true,"role_label_lock":true,"enforcement_mode_lock":true,"visibility_level_lock":true,"enabled":true,"ven_type":"server"}')
 #get k3s label href
 k3s_label_href=$(curl -u $auth_username:$session_token "https://$(hostname):$port/api/v2/orgs/1/labels?key=app&value=A-K3S" | jq -r .[].href)
 #create latest containter cluster
