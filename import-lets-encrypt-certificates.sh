@@ -4,14 +4,6 @@ curl -O https://letsencrypt.org/certs/isrgrootx1.pem
 curl -O https://letsencrypt.org/certs/isrg-root-x2.pem
 curl -O https://letsencrypt.org/certs/gen-y/root-ye.pem
 curl -O https://letsencrypt.org/certs/gen-y/root-yr.pem
-curl -O https://letsencrypt.org/certs/2024/e7.pem
-curl -O https://letsencrypt.org/certs/2024/e8.pem
-curl -O https://letsencrypt.org/certs/2024/r12.pem
-curl -O https://letsencrypt.org/certs/2024/r13.pem
-curl -O https://letsencrypt.org/certs/gen-y/int-ye1.pem
-curl -O https://letsencrypt.org/certs/gen-y/int-ye2.pem
-curl -O https://letsencrypt.org/certs/gen-y/int-yr1.pem
-curl -O https://letsencrypt.org/certs/gen-y/int-yr2.pem
 #staging
 curl -O https://letsencrypt.org/certs/staging/letsencrypt-stg-root-x1.pem
 curl -O https://letsencrypt.org/certs/staging/letsencrypt-stg-root-x2.pem
