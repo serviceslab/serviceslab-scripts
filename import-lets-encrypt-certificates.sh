@@ -1,27 +1,22 @@
 #import-lets-encrypt-certificates.sh
 cd /etc/pki/ca-trust/source/anchors/
 curl -O https://letsencrypt.org/certs/isrgrootx1.pem
-curl -O https://letsencrypt.org/certs/lets-encrypt-r3.pem
-curl -O https://letsencrypt.org/certs/staging/letsencrypt-stg-int-r3.pem
-curl -O https://letsencrypt.org/certs/staging/letsencrypt-stg-int-e1.pem
-curl -O https://letsencrypt.org/certs/staging/letsencrypt-stg-root-x1.pem
-curl -O https://letsencrypt.org/certs/staging/letsencrypt-stg-root-x2.pem
-curl -O https://letsencrypt.org/certs/2024/r10.pem
-curl -O https://letsencrypt.org/certs/2024/r11.pem
-curl -O https://letsencrypt.org/certs/2024/e5.pem
-curl -O https://letsencrypt.org/certs/2024/e6.pem
+curl -O https://letsencrypt.org/certs/isrg-root-x2.pem
+curl -O https://letsencrypt.org/certs/gen-y/root-ye.pem
+curl -O https://letsencrypt.org/certs/gen-y/root-yr.pem
 curl -O https://letsencrypt.org/certs/2024/e7.pem
 curl -O https://letsencrypt.org/certs/2024/e8.pem
-curl -O https://letsencrypt.org/certs/2024/e9.pem
 curl -O https://letsencrypt.org/certs/2024/r12.pem
 curl -O https://letsencrypt.org/certs/2024/r13.pem
-curl -O https://letsencrypt.org/certs/2024/r14.pem
-curl -O https://letsencrypt.org/certs/isrg-root-x1-cross-signed.der
-curl -O https://letsencrypt.org/certs/isrg-root-x2.der
-curl -O https://letsencrypt.org/certs/isrg-root-x2-cross-signed.der
-curl -O https://letsencrypt.org/certs/2024/e5-cross.pem
-curl -O https://letsencrypt.org/certs/2024/e6-cross.pem
-curl -O https://letsencrypt.org/certs/lets-encrypt-e1.pem
+curl -O https://letsencrypt.org/certs/gen-y/int-ye1.pem
+curl -O https://letsencrypt.org/certs/gen-y/int-ye2.pem
+curl -O https://letsencrypt.org/certs/gen-y/int-yr1.pem
+curl -O https://letsencrypt.org/certs/gen-y/int-yr2.pem
+#staging
+curl -O https://letsencrypt.org/certs/staging/letsencrypt-stg-root-x1.pem
+curl -O https://letsencrypt.org/certs/staging/letsencrypt-stg-root-x2.pem
+curl -O https://letsencrypt.org/certs/staging/gen-y/root-ye.pem
+curl -O https://letsencrypt.org/certs/staging/gen-y/root-yr.pem
 echo "-----BEGIN CERTIFICATE-----
 MIIFTTCCAzWgAwIBAgIRAIEbJZNMRe313pPFbPDf1AQwDQYJKoZIhvcNAQELBQAw
 ZjELMAkGA1UEBhMCVVMxMzAxBgNVBAoTKihTVEFHSU5HKSBJbnRlcm5ldCBTZWN1
