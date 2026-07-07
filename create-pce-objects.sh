@@ -119,3 +119,5 @@ curl -u $auth_username:$session_token https://$(hostname):$port/api/v2/orgs/1/se
 curl -u $auth_username:$session_token https://$(hostname):$port/api/v2/orgs/1/sec_policy -X POST -H 'content-type: application/json' --data-raw '{"update_description":"","change_subset":{"firewall_settings":[{"href":"/orgs/1/sec_policy/draft/firewall_settings"}]}}'
 #enable rule hit count report
 curl -u $auth_username:$session_token https://$(hostname):$port/api/v2/orgs/1/report_templates/rule_hit_count_report -X PUT -H 'Content-Type: application/json' --data-raw '{"enabled": true}'
+#enable linux_outbound_process_enforcement
+#curl -u $auth_username:$session_token https://$(hostname):$port/api/v2/orgs/1/optional_features -X PUT -H 'Content-Type: application/json' --data-raw '[{"name":"linux_outbound_process_enforcement","enabled":true}]'
