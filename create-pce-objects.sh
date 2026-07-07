@@ -120,4 +120,4 @@ curl -u $auth_username:$session_token https://$(hostname):$port/api/v2/orgs/1/se
 #enable rule hit count report
 curl -u $auth_username:$session_token https://$(hostname):$port/api/v2/orgs/1/report_templates/rule_hit_count_report -X PUT -H 'Content-Type: application/json' --data-raw '{"enabled": true}'
 #enable linux_outbound_process_enforcement
-#curl -u $auth_username:$session_token https://$(hostname):$port/api/v2/orgs/1/optional_features -X PUT -H 'Content-Type: application/json' --data-raw '[{"name":"linux_outbound_process_enforcement","enabled":true}]'
+curl -u $auth_username:$session_token https://$(hostname):$port/api/v2/orgs/1/optional_features -X PUT -H 'Content-Type: application/json' --data-raw '[{"name":"linux_outbound_process_enforcement","enabled":true}]'
