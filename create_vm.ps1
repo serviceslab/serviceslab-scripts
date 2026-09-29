@@ -16,7 +16,7 @@ if("$vcenter_region" -eq "EU"){
     $datastore=Get-Datastore -RelatedObject $vm_host | Where-Object{$_.Name -like "*LOCAL*"}
 }
 else{
-    $vm_host=Get-VMHost -State Connected | Get-Random
+    $vm_host=Get-Datacenter -Name "Support" | Get-VMHost -State Connected | Get-Random
     $datastore=Get-Datastore -RelatedObject $vm_host | Where-Object{$_.Name -like "*support*"} | Get-Random
 }
 Write-Host $vm_host
